@@ -60,43 +60,34 @@
                     <thead>
                         <tr>
                             <th>SL.NO</th>
-                            <th>Patient ID</th>
-                            <th>Image<i class="table-dragger-handle"></th>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>E-mail</th>
-                            <th>Mobile</th>
-                            <th>Phone</th>
-                            <th>Action</th>
+                            <th>Patient ID<i class="table-dragger-handle"></i></th>
+                            <th>Doctor name</th>
+                            <th>Description</th>
+                            <th>Upload by</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>SL.NO</th>
                             <th>Patient ID</th>
-                            <th>Image</th>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>E-mail</th>
-                            <th>Mobile</th>
-                            <th>Phone</th>
-                            <th>Action</th>
+                            <th>Doctor name</th>
+                            <th>Description</th>
+                            <th>Upload by</th>
+                            {{-- <th>Action</th> --}}
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($patients as $patient)
+                        @foreach ($documents as $document)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $patient->id }}</td>
-                                <td>
-                                    <img style="max-width: 50px" src="{{ asset('dashboard/photo/patient_image') }}/{{ $patient->image }}" class="img-fluid" alt="">
-                                </td>
-                                <td>{{ $patient->first_name }}</td>
-                                <td>{{ $patient->last_name }}</td>
-                                <td>{{ $patient->email }}</td>
-                                <td>{{ $patient->mobile }}</td>
-                                <td>{{ $patient->phone }}</td>
-                                <td>
+                                <td>{{ $document->patient_id }}</td>
+                                <td>{{ $document->doctor->first_name }} {{ $document->doctor->last_name }}</td>
+                                <td>{{ $document->description }}</td>
+                                <td>{{ $document->user->name }}</td>
+
+
+                                {{-- <td>
                                     <div class="btn-group btn-group-sm" role="group">
                                         <a class="btn btn-info btn-sm" href="{{ route('patient.edit', $patient->id) }}">
                                             <i class="fa fa-eye"></i></i>
@@ -112,7 +103,7 @@
                                             </button>
                                         </form>
                                     </div>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>

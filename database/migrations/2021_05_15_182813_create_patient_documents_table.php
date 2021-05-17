@@ -16,7 +16,7 @@ class CreatePatientDocumentsTable extends Migration
         Schema::create('patient_documents', function (Blueprint $table) {
             $table->id();
             $table->string('patient_id', 50)->nullable(false);
-            $table->string('document')->nullable(false);
+            $table->string('document')->nullable();
             $table->string('doctor_id')->nullable();
             $table->text('description')->nullable();
             $table->text('upload_by')->nullable(false);
