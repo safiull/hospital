@@ -44,3 +44,8 @@ Route::get('patients/add', 'PatientController@patientAdd');
 // Patient Document
 Route::resource('/patient-document', 'PatientDocumentController');
 Route::get('patient_documents/add', 'PatientDocumentController@patientDocumentAdd');
+// Download document
+Route::get('download/patient/document/{id}', 'PatientDocumentController@DownloadDocument');
+
+
+Route::resource('schedule', 'ScheduleController');

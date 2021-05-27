@@ -55,40 +55,47 @@
                     <thead>
                         <tr>
                             <th>SL.NO</th>
-                            <th>Patient ID<i class="table-dragger-handle"></i></th>
                             <th>Doctor name</th>
-                            <th>Description</th>
-                            <th>Upload by</th>
+                            <th>Depertment</th>
+                            <th>Available Day<i class="table-dragger-handle"></i></th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Per patient time</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th>SL.NO</th>
-                            <th>Patient ID</th>
                             <th>Doctor name</th>
-                            <th>Description</th>
-                            <th>Upload by</th>
+                            <th>Depertment</th>
+                            <th>Available Day</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Per patient time</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        @foreach ($documents as $document)
+                        @foreach ($schedules as $schedule)
                             <tr>
                                 <td>{{ $loop->index + 1 }}</td>
-                                <td>{{ $document->patient_id }}</td>
-                                <td>{{ $document->doctor->first_name }} {{ $document->doctor->last_name }}</td>
-                                <td>{{ $document->description }}</td>
-                                <td>{{ $document->user->name }}</td>
+                                <td>{{ $schedule->doctor->first_name }}</td>
+                                <td>{{ $schedule->department->name }}</td>
+                                <td>{{ $schedule->available_day }}</td>
+                                <td>{{ $schedule->start_time }}</td>
+                                <td>{{ $schedule->end_time }}</td>
+                                <td>{{ $schedule->per_patient_time }}</td>
+                                
                                 <td>
                                     <div class="btn-group btn-group-sm" role="group">
-                                        <a class="btn btn-info btn-sm" href="{{ url('download/patient/document') }}/{{ $document->id }}">
-                                            <i class="fa fa-download"></i>
+                                        <a class="btn btn-info btn-sm" href="{{ route('schedule.show', $schedule->id) }}">
+                                            <i class="fa fa-edit"></i>
                                         </a>
                                         {{-- <a class="btn btn-warning btn-sm" href="{{ route('patient.show', $patient->id) }}">
                                             <i class="fa fa-edit"></i>
                                         </a> --}}
-                                        <form method="POST" action="{{ route('patient-document.destroy', $document->id) }}">
+                                        <form method="POST" action="{{ route('schedule.destroy', $schedule->id) }}">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm">

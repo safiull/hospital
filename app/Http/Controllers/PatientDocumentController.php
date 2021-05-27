@@ -7,6 +7,7 @@ use App\Doctor;
 use App\PatientDocument;
 use Carbon\Carbon;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PatientDocumentController extends Controller
 {
@@ -50,7 +51,7 @@ class PatientDocumentController extends Controller
     {
         $validatedData = $request->validate([
             'patient_id' => 'required|integer|min:3',
-            'document' => 'required|file|max:1024|mimes:jpg,bmp,png,pdf,svg,csv,JPEG,txt',
+            'document' => 'required|file|max:1024|mimes:jpg,bmp,png,pdf,svg,csv,JPEG,txt,doc,docs',
             'doctor_id' => 'nullable|integer',
             'description' => 'max:1000',
             // 'upload_by' => 'required|integer|min:1|max:10',
@@ -105,6 +106,12 @@ class PatientDocumentController extends Controller
         //
     }
 
+
+    public function DownloadDocument($id)
+    {
+        return Storage::download(PatientDocument::find($id)->document);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -113,6 +120,9 @@ class PatientDocumentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $document = PatientDocument::findOrFail($id);
+        $document->delete();
+        Storage::delete($document->document);
+        return redirect('/patient-document')->with('delete_status', 'Patient document deleted successfully!');
     }
 }

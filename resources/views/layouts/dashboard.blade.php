@@ -253,6 +253,13 @@
                                     <li class="@yield('patient_document_list_active')"><a href="{{ route('patient-document.index') }}">All Documents</a></li>
                                 </ul>
                             </li>
+
+                            <li class="@yield('schedule_active')"><a href="javascript:void(0);" class="has-arrow"><i class="icon-layers"></i><span>Schedule</span> </a>
+                                <ul>
+                                    <li class="@yield('schedule_add_active')"><a href="{{ route('schedule.create') }}">Add Schedule</a></li>
+                                    <li class="@yield('schedule_list_active')"><a href="{{ route('schedule.index') }}">All Schedules</a></li>
+                                </ul>
+                            </li>
                             {{-- <li><a href="our-centres.html"><i class="icon-pointer"></i>WorldWide Centres</a></li>
                             <li>
                                 <a href="#Authentication" class="has-arrow"><i class="icon-lock"></i><span>Authentication</span></a>
